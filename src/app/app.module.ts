@@ -15,6 +15,8 @@ import { ListEmpleadosComponent } from './components/list-empleados/list-emplead
 import { CreateEmpleadoComponent } from './components/create-empleado/create-empleado.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { environment } from 'src/environments/environment';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { environment } from 'src/environments/environment';
     AppComponent,
     ListEmpleadosComponent,
     CreateEmpleadoComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
