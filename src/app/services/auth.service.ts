@@ -18,9 +18,11 @@ export class AuthService {
       const result = await this.afAuth.signInWithEmailAndPassword(email, password).then(
         res => {
           this.isLoggedIn = true;
-          localStorage.setItem('user', JSON.stringify(res.user))
+          localStorage.setItem('user', JSON.stringify(res.user))  
+          return true;   
         }
       )
+      console.log("RESULT LOGIN",result)
       return result;
     } catch (error) {
       console.log("Login Error", error);
@@ -33,9 +35,10 @@ export class AuthService {
       const result = await this.afAuth.createUserWithEmailAndPassword(email, password).then(
         res => {
           this.isLoggedIn = true;
-          localStorage.setItem('user', JSON.stringify(res.user))
+          //localStorage.setItem('user', JSON.stringify(res.user))
         }
       )
+      console.log("RESULT",result)
       return result;
     } catch (error) {
       console.log("Register Error", error)

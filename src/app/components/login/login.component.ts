@@ -3,6 +3,7 @@ import { EventEmitter } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -21,7 +22,9 @@ export class LoginComponent implements OnInit {
   loading = false;
   isLoggedin?: boolean;
 
-  constructor(private router: Router, public authservice: AuthService) { }
+  constructor(private router: Router, 
+    private toastr: ToastrService,
+    public authservice: AuthService) { }
   @Output() isLogOut = new EventEmitter<void>();
   ngOnInit(): void {
   }
@@ -35,7 +38,20 @@ export class LoginComponent implements OnInit {
 
   }
   async onLogin() {
-    console.log("Login->", this.loginForm.value)
+    const { email, password } = this.loginForm.value;
+   // console.log("LOGIN", await this.authservice.login(email, password))
+    if (await this.authservice.login(email, password) != null) {
+      this.router.navigate(['/list-empleados'])
+    } else {
+      console.log("Error")
+      this.toastr.error("El usuario no se encuentra", "Ha ocurrido un Error")
+    }
+
+
+
+    // console.log("Login->", this.loginForm.value)
+    //console.log("Logeado correctamente");
+
     /*const {email, password}=this.loginForm.value;
     try{
       const user = await this.authSvc.login(email, password);
